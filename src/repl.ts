@@ -1,4 +1,3 @@
-import { stringify } from "querystring"
 
 export function cleanInput(input: string): string[] {
     const actual: string[] = [];
@@ -12,4 +11,25 @@ export function cleanInput(input: string): string[] {
     return actual
 }
 
+export function startREPL(){
+    const {readline} = require('readline');
+
+    let rl = readline.createInterface({
+        input: process.stdin, 
+        output: process.stdout,
+        prompt: ' >',
+    });
+
+    rl.prompt();
+
+    rl.on("line", (input: string) => { 
+        const firstWord = cleanInput(input);  
+        if (!input){
+        rl.prompt();
+        }
+        console.log(`Your command was: ${firstWord}`);
+        rl.prompt();
+    });
+
+}
 cleanInput("Hello, World");
